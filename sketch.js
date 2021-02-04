@@ -64,7 +64,9 @@ function setup() {
 
       let particleBelow = particles[i + 1][j];
       let s2 = new Spring(a, particleBelow, 10, 0.5)
+      springRow.push(s2);
       physics.addSpring(s2);
+
     }
     springs.push(springRow);
 
@@ -85,11 +87,11 @@ function draw() {
   background(40);
   physics.update();
 
-  // particles.forEach(row => {
-  //   row.forEach(p => {
-  //     p.display();
-  //   })
-  // })
+  particles.forEach(row => {
+    row.forEach(p => {
+      p.display();
+    })
+  })
 
   springs[0].forEach(s => {
     s.display();
