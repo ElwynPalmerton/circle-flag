@@ -27,22 +27,21 @@ function setup() {
   createCanvas(600, 600);
   background(40);
 
-  const x = 10;
-  const y = 10;
+  const x = 20;
+  const y = 20;
 
-  // let yPos = 10;
-  // for (let j = 0; j < 40; j++) {
-  // yPos = y * j + 20;
 
   for (let i = 0; i < 20; i++) {
     const particleRow = []
-    let yPos = 20 * i;
-    for (let j = 0; j < 40; j++) {
+    let yPos = y * i;
+
+    for (let j = 0; j < 20; j++) {
       let xPos = x * j + 100;
       let p = new Particle(xPos, yPos);
       particleRow.push(p);
       physics.addParticle(p);
     }
+
     particles.push(particleRow);
   }
   // }
@@ -53,22 +52,28 @@ function setup() {
   p2.lock();
 
 
-  for (let i = 0; i < particles.length - 1; i++) {
-
+  for (let i = 0; i < particles.length; i++) {
+    console.log(i);
     for (let j = 0; j < particles[0].length - 1; j++) {
       let a = particles[i][j];
       let b = particles[i][j + 1];
-      let s = new Spring(a, b, 10, 0.5);
-      springRow.push(s);
+      let s = new Spring(a, b, 20, 0.5);
+      springs.push(s);
       physics.addSpring(s);
+    }
+  }
 
-      let particleBelow = particles[i + 1][j];
-      let s2 = new Spring(a, particleBelow, 10, 0.5)
-      springRow.push(s2);
+
+  for (let i = 0; i < particles.length - 1; i++) {
+
+    for (let j = 0; j < particles[0].length; j++) {
+      let a = particles[i][j];
+      let c = particles[i + 1][j];
+      let s2 = new Spring(a, c, 20, 0.5)
+      springs.push(s2);
       physics.addSpring(s2);
 
     }
-    springs.push(springRow);
 
   }
 }
@@ -93,7 +98,7 @@ function draw() {
     })
   })
 
-  springs[0].forEach(s => {
+  springs.forEach(s => {
     s.display();
   })
 
