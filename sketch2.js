@@ -23,47 +23,49 @@ function setup() {
   createCanvas(600, 600);
   background(40);
 
-  //The border around all of it.
-  const border = 50;
+  const x = 20;
+  const y = 20;
 
-  //The number of rows and columns.
-  const columns = 20;
-  const rows = 20;
-
-  const x = (width - border * 2) / columns;
-  const y = (height - border * 2) / rows;
-  console.log(x, y);
-
-  //Creates a grid of Verlet particles and pushes them to the particles array.
-  for (let i = 0; i < rows; i++) {
+  for (let i = 0; i < 20; i++) {
     const particleRow = [];
-    let yPos = y * i + border + y / 2;
-    for (let j = 0; j < columns; j++) {
-      let xPos = x * j + border + x / 2;
+    let yPos = y * i;
+
+    for (let j = 0; j < 20; j++) {
+      let xPos = x * j + 100;
       let p = new Particle(xPos, yPos);
       particleRow.push(p);
       physics.addParticle(p);
     }
+
     particles.push(particleRow);
   }
+  // }
 
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < columns; j++) {
-      // console.log(i);
-      particles[j][i].setAngleStart(i, j, columns);
+  let p1 = particles[0][0];
+  let p2 = particles[0][particles[0].length - 1];
+  p1.lock();
+  p2.lock();
+
+  for (let i = 0; i < particles.length; i++) {
+    console.log(i);
+    for (let j = 0; j < particles[0].length - 1; j++) {
+      let a = particles[i][j];
+      let b = particles[i][j + 1];
+      let s = new Spring(a, b, 20, 0.5);
+      springs.push(s);
+      physics.addSpring(s);
     }
   }
 
-  //Add a spring
-  // 1. access two particles
-  // let a = particles[i][j];
-  // let b = particles[i][j + 1];
-  // 2. Create a new spring (particle1, particle2, length?, springiness? ).
-  // let s = new Spring(a, b, 20, 0.5);
-  // 3. Add it to the springs array.
-  // springs.push(s);
-  // 4. Add it to the physics.
-  // physics.addSpring(s);
+  for (let i = 0; i < particles.length - 1; i++) {
+    for (let j = 0; j < particles[0].length; j++) {
+      let a = particles[i][j];
+      let c = particles[i + 1][j];
+      let s2 = new Spring(a, c, 20, 0.5);
+      springs.push(s2);
+      physics.addSpring(s2);
+    }
+  }
 }
 
 let run = true;
@@ -80,10 +82,7 @@ function draw() {
 
   particles.forEach((row) => {
     row.forEach((p) => {
-      p.update();
-      p.setPosition();
-      // p.display();
-      p.displayOffset();
+      p.display();
     });
   });
 

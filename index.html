@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="">
+  <head>
+    <link rel="stylesheet" href="app.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p5.js example</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+    <script type="text/javascript" src="./build/toxiclibs.js"></script>
+    <script type="text/javascript">
+      var myVector = new toxi.geom.Vec2D(
+        window.innerWidth,
+        window.innerHeight
+      ).scaleSelf(0.5);
+      var myColor = toxi.color.TColor.newRGB(128 / 255, 64 / 255, 32 / 255);
+    </script>
+    <script src="sketch.js"></script>
+    <script src="Particle.js"></script>
+    <script src="Spring.js"></script>
+  </head>
 
-<head>
-  <link rel="stylesheet" href="app.css">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>p5.js example</title>
-  <style>
-    body {
-      padding: 0;
-      margin: 0;
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
-  <script type="text/javascript" src="./build/toxiclibs.js"></script>
-  <script type="text/javascript">
-    var myVector = new toxi.geom.Vec2D(window.innerWidth, window.innerHeight).scaleSelf(0.5);
-    var myColor = toxi.color.TColor.newRGB(128 / 255, 64 / 255, 32 / 255);
-  </script>
-  <script src="sketch.js"></script>
-  <script src="Particle.js"></script>
-  <script src="Spring.js"></script>
-
-</head>
-
-<body>
-  <h1>Hello</h1>
-  <div id="canvasContainer"></div>
-
-</body>
-
+  <body>
+    <div id="canvasContainer"></div>
+  </body>
 </html>
